@@ -1,0 +1,8 @@
+.env
+__pycache__/
+*.py[cod]
+.venv/
+ea-docs/
+data/
+resume1.bat
+src/dvm_eagraph/_version.py

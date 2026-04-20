@@ -1,0 +1,48 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "dvm-eagraph"
+dynamic = ["version"]
+description = "Download LeanIX factsheets and relationships and load them into Neo4j"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+dependencies = [
+    "neo4j>=5.0",
+    "python-dotenv>=1.0",
+    "pyyaml>=6.0",
+    "dvm-leanix>=0.5.0",
+]
+
+[project.scripts]
+dvm-eagraph = "dvm_eagraph.load_leanix:main"
+dvm-eagraph-seed = "dvm_eagraph.seed:main"
+
+[project.urls]
+Repository = "https://github.com/divyavanmahajan/dvm-eagraph"
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/dvm_eagraph/_version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/dvm_eagraph"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP"]
+
+[tool.ruff.lint.per-file-ignores]
+"src/dvm_eagraph/seed.py" = ["E501"]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.15.11",
+]

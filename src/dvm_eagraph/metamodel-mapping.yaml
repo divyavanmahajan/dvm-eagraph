@@ -1,0 +1,197 @@
+# LeanIX → Neo4j metamodel mapping
+# Generated: 2026-04-13
+#
+# factsheet_types: controls which FactSheet types are downloaded/loaded
+#   and what Neo4j node label is used for each.
+# relationships: maps LeanIX relation field names to Neo4j relationship types.
+#
+# Edit node_label and relationship values freely; re-run load_leanix.py to apply.
+
+factsheet_types:
+  Application:
+    node_label: Application
+    subtypes:
+      AIAgent:
+        node_label: Application
+      BusinessAppl:
+        node_label: Application
+      Microservice:
+        node_label: Application
+  BusinessCapability:
+    node_label: BusinessCapability
+  BusinessContext:
+    node_label: BusinessContext
+    subtypes:
+      BusinessProduct:
+        node_label: BusinessContext
+      CustomerJourney:
+        node_label: BusinessContext
+      Process:
+        node_label: BusinessContext
+      ValueStream:
+        node_label: BusinessContext
+  DataObject:
+    node_label: DataObject
+  DigitalProductHierarchy:
+    node_label: DigitalProductHierarchy
+  FactSheetOfUnknownType:
+    node_label: FactSheetOfUnknownType
+  ITComponent:
+    node_label: ITComponent
+    subtypes:
+      AIModel:
+        node_label: ITComponent
+      Hardware:
+        node_label: ITComponent
+      IaaS:
+        node_label: ITComponent
+      PaaS:
+        node_label: ITComponent
+      SaaS:
+        node_label: ITComponent
+      Service:
+        node_label: ITComponent
+      Software:
+        node_label: ITComponent
+  Initiative:
+    node_label: Initiative
+    subtypes:
+      Epic:
+        node_label: Initiative
+      Idea:
+        node_label: Initiative
+      Program:
+        node_label: Initiative
+      Project:
+        node_label: Initiative
+  Interface:
+    node_label: Interface
+    subtypes:
+      API:
+        node_label: Interface
+      LogicalInterface:
+        node_label: Interface
+      MCPServer:
+        node_label: Interface
+  Objective:
+    node_label: Objective
+  Organization:
+    node_label: Organization
+    subtypes:
+      BusinessUnit:
+        node_label: Organization
+      Customer:
+        node_label: Organization
+      LegalEntity:
+        node_label: Organization
+      Region:
+        node_label: Organization
+      Team:
+        node_label: Organization
+  Platform:
+    node_label: Platform
+  Provider:
+    node_label: Provider
+  TechnicalStack:
+    node_label: TechnicalStack
+  targetMap:
+    node_label: targetMap
+relationships:
+  relApplicationToBusinessCapability: SUPPORTS
+  relApplicationToBusinessContext: APPLICATION_TO_BUSINESS_CONTEXT
+  relApplicationToDataObject: CRUD
+  relApplicationToDigitalProductHierarchy: APPLICATION_TO_DIGITAL_PRODUCT_HIERARCHY
+  relApplicationToITComponent: USES
+  relApplicationToInitiative: AFFECTED_BY
+  relApplicationToInterface: PROVIDES
+  relApplicationToOrganization: OWNED_BY
+  relApplicationToPlatform: PART_OF
+  relApplicationToProvider: PROVIDED_BY
+  relApplicationTotargetMap: APPLICATION_TOTARGET_MAP
+  relBusinessCapabilityToApplication: SUPPORTED_BY
+  relBusinessCapabilityToBusinessContext: ASSOCIATED_WITH
+  relBusinessCapabilityToITComponent: BUSINESS_CAPABILITY_TO_I_T_COMPONENT
+  relBusinessCapabilityToInitiative: BUSINESS_CAPABILITY_TO_INITIATIVE
+  relBusinessCapabilityToObjective: BUSINESS_CAPABILITY_TO_OBJECTIVE
+  relBusinessCapabilityToOrganization: OWNED_BY
+  relBusinessCapabilityToPlatform: BUSINESS_CAPABILITY_TO_PLATFORM
+  relBusinessContextToApplication: BUSINESS_CONTEXT_TO_APPLICATION
+  relBusinessContextToBusinessCapability: SUPPORTS
+  relBusinessContextToDigitalProductHierarchy: BUSINESS_CONTEXT_TO_DIGITAL_PRODUCT_HIERARCHY
+  relBusinessContextToInitiative: BUSINESS_CONTEXT_TO_INITIATIVE
+  relBusinessContextToObjective: BUSINESS_CONTEXT_TO_OBJECTIVE
+  relBusinessContextToOrganization: BUSINESS_CONTEXT_TO_ORGANIZATION
+  relConsumerApplicationToInterface: CONSUMER_APPLICATION_TO_INTERFACE
+  relDataObjectToApplication: USED_BY
+  relDataObjectToInitiative: DATA_OBJECT_TO_INITIATIVE
+  relDataObjectToInterface: CARRIED_BY
+  relDigitalProductHierarchyToApplication: DIGITAL_PRODUCT_HIERARCHY_TO_APPLICATION
+  relDigitalProductHierarchyToBusinessContext: DIGITAL_PRODUCT_HIERARCHY_TO_BUSINESS_CONTEXT
+  relDigitalProductHierarchyToInitiative: DIGITAL_PRODUCT_HIERARCHY_TO_INITIATIVE
+  relESGCapabilityToBusinessCapability: IS_ASSOCIATED_WITH
+  relITComponentToApplication: HOSTS
+  relITComponentToBusinessCapability: I_T_COMPONENT_TO_BUSINESS_CAPABILITY
+  relITComponentToInitiative: I_T_COMPONENT_TO_INITIATIVE
+  relITComponentToInterface: HOSTS
+  relITComponentToOrganization: I_T_COMPONENT_TO_ORGANIZATION
+  relITComponentToPlatform: I_T_COMPONENT_TO_PLATFORM
+  relITComponentToProvider: OFFERED_BY
+  relITComponentToTechCategory: BELONGS_TO
+  relITComponentToTechnologyStack: I_T_COMPONENT_TO_TECHNOLOGY_STACK
+  relInitiativeToApplication: AFFECTS
+  relInitiativeToBlockedInitiative: INITIATIVE_TO_BLOCKED_INITIATIVE
+  relInitiativeToBlockingInitiative: INITIATIVE_TO_BLOCKING_INITIATIVE
+  relInitiativeToBusinessCapability: AFFECTS
+  relInitiativeToBusinessContext: AFFECTS
+  relInitiativeToDataObject: INITIATIVE_TO_DATA_OBJECT
+  relInitiativeToDigitalProductHierarchy: INITIATIVE_TO_DIGITAL_PRODUCT_HIERARCHY
+  relInitiativeToITComponent: AFFECTS
+  relInitiativeToInterface: AFFECTS
+  relInitiativeToObjective: IMPROVES
+  relInitiativeToOrganization: AFFECTS
+  relInitiativeToPlatform: IMPROVES
+  relInitiativeToProvider: AFFECTS
+  relInitiativeToTechnicalStack: INITIATIVE_TO_TECHNICAL_STACK
+  relInitiativeTotargetMap: INITIATIVE_TOTARGET_MAP
+  relInterfaceToApplication: CONSUMED_BY
+  relInterfaceToConsumerApplication: INTERFACE_TO_CONSUMER_APPLICATION
+  relInterfaceToDataObject: TRANSFERS
+  relInterfaceToITComponent: RUNS_ON
+  relInterfaceToInitiative: INTERFACE_TO_INITIATIVE
+  relInterfaceToProviderApplication: INTERFACE_TO_PROVIDER_APPLICATION
+  relNextStepBusinessContextToPreviousStepBusinessContext: NEXT_STEP_BUSINESS_CONTEXT_TO_PREVIOUS_STEP_BUSINESS_CONTEXT
+  relObjectiveToBusinessCapability: OBJECTIVE_TO_BUSINESS_CAPABILITY
+  relObjectiveToBusinessContext: OBJECTIVE_TO_BUSINESS_CONTEXT
+  relObjectiveToInitiative: OBJECTIVE_TO_INITIATIVE
+  relObjectiveToOrganization: OBJECTIVE_TO_ORGANIZATION
+  relObjectiveToPlatform: OBJECTIVE_TO_PLATFORM
+  relOrganizationToApplication: RUNS
+  relOrganizationToBusinessCapability: USES
+  relOrganizationToBusinessContext: ORGANIZATION_TO_BUSINESS_CONTEXT
+  relOrganizationToDataObject: OWNS
+  relOrganizationToITComponent: ORGANIZATION_TO_I_T_COMPONENT
+  relOrganizationToInitiative: ORGANIZATION_TO_INITIATIVE
+  relOrganizationToObjective: OWNS
+  relOrganizationToPlatform: SUPPORTS
+  relOrganizationTotargetMap: ORGANIZATION_TOTARGET_MAP
+  relPlatformToApplication: PLATFORM_TO_APPLICATION
+  relPlatformToBusinessCapability: SUPPORTS
+  relPlatformToITComponent: PLATFORM_TO_I_T_COMPONENT
+  relPlatformToInitiative: PLATFORM_TO_INITIATIVE
+  relPlatformToObjective: SUPPORTS
+  relPreviousStepBusinessContextToNextStepBusinessContext: PREVIOUS_STEP_BUSINESS_CONTEXT_TO_NEXT_STEP_BUSINESS_CONTEXT
+  relProviderApplicationToInterface: PROVIDER_APPLICATION_TO_INTERFACE
+  relProviderToITComponent: OFFERS
+  relProviderToInitiative: PROVIDER_TO_INITIATIVE
+  relSystemToITComponent: RUNS_ON
+  relTechnicalStackToInitiative: TECHNICAL_STACK_TO_INITIATIVE
+  relTechnologyStackToITComponent: TECHNOLOGY_STACK_TO_I_T_COMPONENT
+  relToChild: TO_CHILD
+  relToParent: CHILD_OF
+  relToPredecessor: PRECEDES
+  relToRequiredBy: TO_REQUIRED_BY
+  relToRequires: TO_REQUIRES
+  relToSuccessor: SUCCEEDED_BY
+  reltargetMapToApplication: TARGET_MAP_TO_APPLICATION
+  reltargetMapToInitiative: TARGET_MAP_TO_INITIATIVE
+  reltargetMapToOrganization: TARGET_MAP_TO_ORGANIZATION
