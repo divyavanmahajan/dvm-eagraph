@@ -10,10 +10,13 @@ Run:
   py seed.py
 """
 
+import argparse
 import os
 
 from dotenv import load_dotenv
 from neo4j import GraphDatabase
+
+from dvm_eagraph import __version__
 
 load_dotenv()
 
@@ -189,6 +192,9 @@ def seed():
 
 
 def main():
+    parser = argparse.ArgumentParser(description="Seed a demo Application Capability Map graph into Neo4j.")
+    parser.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
+    parser.parse_args()
     seed()
 
 

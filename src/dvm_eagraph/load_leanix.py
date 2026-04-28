@@ -49,6 +49,7 @@ from dotenv import load_dotenv
 from lean_ix.download import (
     _BASE_SUBSELECT,
     _SAFE_BASE_FIELDS,
+    _collect_object_subfields,
     build_query,
     build_relations_query,
     fetch_all,
@@ -58,6 +59,8 @@ from lean_ix.download import (
     write_json,
 )
 from neo4j import GraphDatabase
+
+from dvm_eagraph import __version__
 
 load_dotenv()
 
@@ -593,7 +596,10 @@ def download_factsheets(
             if "completion" in base_field_names:
                 base_fields.append("completion")
 
-            query = build_query(type_name, type_fields, base_fields)
+            base_names = set(base_fields) | {"id", "name", "type", "category"}
+            object_subfields = _collect_object_subfields(proxy, type_fields, base_names, ssl_verify)
+
+            query = build_query(type_name, type_fields, base_fields, object_subfields)
             records = fetch_all(
                 proxy_url=proxy,
                 query=query,
@@ -603,6 +609,7 @@ def download_factsheets(
                 verbose=True,
                 type_fields=type_fields,
                 base_fields=base_fields,
+                object_subfields=object_subfields,
                 limit=limit,
             )
 
@@ -958,6 +965,11 @@ def parse_args() -> argparse.Namespace:
             "and per relationship type. Useful for quickly verifying that downloads and "
             "Neo4j loading are working correctly without processing the full dataset."
         ),
+    )
+    parser.add_argument(
+        "--version",
+        action="version",
+        version=f"%(prog)s {__version__}",
     )
     return parser.parse_args()
 
